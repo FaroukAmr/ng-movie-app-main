@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 
 import { AuthenticationService } from '../authentication/authentication.service';
 import { Router } from '@angular/router';
+import { SearchService } from '../search.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,10 +16,10 @@ export class NavbarComponent implements OnDestroy {
   private userSubscription: Subscription = new Subscription();
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private searchService: SearchService
   ) {
     this.userSubscription = this.authService.user$.subscribe((user) => {
-      console.log(user);
       if (user) {
         this.isAuthenticated = true;
         this.username = user.displayName as string;
@@ -45,5 +46,10 @@ export class NavbarComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
+  }
+
+  searchMovies(query: string) {
+    console.log(query);
+    this.searchService.setSearchQuery(query);
   }
 }

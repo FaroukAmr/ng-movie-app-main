@@ -8,11 +8,16 @@ import { environment } from 'src/environments/environment';
 })
 export class MovieService {
   private apiKey = environment.THEMOVIEDB_API_KEY;
-  private apiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}`;
+  private topRatedUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}`;
 
   constructor(private http: HttpClient) {}
 
   getTopMovies(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.topRatedUrl);
+  }
+
+  searchMovies(query: string): Observable<any> {
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${query}`;
+    return this.http.get(searchUrl);
   }
 }

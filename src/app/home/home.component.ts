@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MovieService } from '../home/movies.service';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,22 @@ import { MovieService } from '../home/movies.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private searchService: SearchService
+  ) {}
 
   topMovies: any;
+  title: string = 'Top Rated Movies';
 
   ngOnInit() {
+    this.getTopMoviesFromLocalStorage();
+    this.searchService.searchQuery$.subscribe((query) => {
+      this.handleSearch(query);
+    });
+  }
+
+  getTopMoviesFromLocalStorage() {
     const storedData = localStorage.getItem('topMoviesData');
     if (storedData) {
       const parsedData = JSON.parse(storedData);
@@ -29,7 +41,6 @@ export class HomeComponent {
   }
 
   getTopMovies() {
-    console.log('called the API');
     this.movieService.getTopMovies().subscribe((data) => {
       this.topMovies = data.results;
       this.storeDataToLocalStorage(data.results);
@@ -42,5 +53,17 @@ export class HomeComponent {
       data: data,
     };
     localStorage.setItem('topMoviesData', JSON.stringify(dataToStore));
+  }
+
+  handleSearch(query: string) {
+    if (query === '') {
+      this.title = 'Top Rated Movies';
+      this.getTopMoviesFromLocalStorage();
+      return;
+    }
+    this.movieService.searchMovies(query).subscribe((data) => {
+      this.topMovies = data.results;
+      this.title = 'Search Results';
+    });
   }
 }

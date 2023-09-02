@@ -1,0 +1,32 @@
+body {
+  background-color: #f8f9fa;
+}
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0px 20px 0px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  max-width: 13rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-around;
+}
+
+.error-message {
+  max-width: fit-content;
+}

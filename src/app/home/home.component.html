@@ -1,0 +1,8 @@
+<div *ngIf="topMovies">
+  <h1>Top Rated Movies</h1>
+  <ul>
+    <li *ngFor="let movie of topMovies">
+      {{ movie.title }} ({{ movie.release_date }})
+    </li>
+  </ul>
+</div>

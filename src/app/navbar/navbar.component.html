@@ -1,0 +1,75 @@
+<nav
+  class="navbar navbar-expand-sm navbar-light"
+  style="background-color: #e3f2fd"
+>
+  <div class="container-fluid">
+    <a
+      class="navbar-brand"
+      href="#"
+      style="cursor: pointer"
+      (click)="navigateToHome()"
+      >Movies App</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav" style="gap: 10px">
+        <li class="nav-item">
+          <button class="btn" type="button" (click)="navigateToHome()">
+            Home
+          </button>
+        </li>
+
+        <div class="d-flex align-items-center" *ngIf="isAuthenticated">
+          <li class="text">Hello, {{ username }}</li>
+        </div>
+
+        <li class="nav-item">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="handleLoginClick()"
+            *ngIf="!isAuthenticated"
+          >
+            Login
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="handleLogoutClick()"
+            *ngIf="isAuthenticated"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search Movies"
+            aria-label="Search"
+          />
+          <div class="input-group-append" style="margin-left: 1px">
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>

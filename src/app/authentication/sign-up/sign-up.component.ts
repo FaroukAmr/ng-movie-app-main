@@ -7,6 +7,7 @@ import {
 
 import { AuthenticationService } from '../authentication.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 
 function passwordMatchValidator(
@@ -36,7 +37,8 @@ export class SignUpComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.signupForm = this.fb.group(
       {
@@ -49,19 +51,21 @@ export class SignUpComponent {
     );
   }
 
-  onSubmit() {
+  async onSubmit() {
     const user: User = {
       username: this.signupForm.value.username,
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
     };
-    this.authService.registerUser(user).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+
+    try {
+      await this.authService.registerUser(user);
+      await this.authService.updateProfile(user.username!);
+      this.authService.signOutUser().subscribe(() => {
+        this.router.navigate(['auth', 'login']);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

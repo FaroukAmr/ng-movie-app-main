@@ -15,29 +15,23 @@ export class AuthenticationService {
 
   user$ = this.auth.authState;
 
-  private async updateProfileAndReturnUser(
-    FireBaseUser: FirebaseUser,
-    user: User
-  ): Promise<FirebaseUser> {
+  async updateProfile(username: string) {
     try {
-      await updateProfile(FireBaseUser, {
-        displayName: user.username,
+      const loggedInUser = await this.auth.currentUser;
+      await updateProfile(loggedInUser as FirebaseUser, {
+        displayName: username,
       });
-      return FireBaseUser;
     } catch (error) {
       throw error;
     }
   }
 
-  registerUser(user: User): Observable<any> {
-    return from(
-      this.auth.createUserWithEmailAndPassword(user.email, user.password)
-    ).pipe(
-      tap((credential) => {
-        const userData = credential.user as FirebaseUser;
-        this.updateProfileAndReturnUser(userData, user);
-      })
-    );
+  async registerUser(user: User) {
+    try {
+      await this.auth.createUserWithEmailAndPassword(user.email, user.password);
+    } catch (error) {
+      throw error;
+    }
   }
 
   signInUser(user: User): Observable<any> {

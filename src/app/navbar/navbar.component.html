@@ -3,9 +3,7 @@
   style="background-color: #e3f2fd"
 >
   <div class="container-fluid">
-    <div class="navbar-brand" *ngIf="isAuthenticated">
-      Hello, {{ username }}
-    </div>
+    <div class="navbar-brand" *ngIf="username != ''">Hello, {{ username }}</div>
 
     <button
       class="navbar-toggler"

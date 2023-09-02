@@ -8,7 +8,6 @@ import {
 import { AuthenticationService } from '../authentication.service';
 import { Component } from '@angular/core';
 import { User } from '../../models/user.model';
-import { take } from 'rxjs/operators';
 
 function passwordMatchValidator(
   control: AbstractControl

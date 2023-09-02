@@ -28,8 +28,8 @@ export class NavbarComponent implements OnDestroy {
     });
   }
 
-  handleLoginClick() {
-    this.router.navigate(['auth', 'login']);
+  handleSignUpClick() {
+    this.router.navigate(['auth', 'signup']);
   }
 
   handleLogoutClick() {

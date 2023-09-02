@@ -3,13 +3,10 @@
   style="background-color: #e3f2fd"
 >
   <div class="container-fluid">
-    <a
-      class="navbar-brand"
-      href="#"
-      style="cursor: pointer"
-      (click)="navigateToHome()"
-      >Movies App</a
-    >
+    <div class="navbar-brand" *ngIf="isAuthenticated">
+      Hello, {{ username }}
+    </div>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -27,23 +24,24 @@
     >
       <ul class="navbar-nav" style="gap: 10px">
         <li class="nav-item">
-          <button class="btn" type="button" (click)="navigateToHome()">
+          <button
+            class="btn"
+            type="button"
+            (click)="navigateToHome()"
+            *ngIf="isAuthenticated"
+          >
             Home
           </button>
         </li>
-
-        <div class="d-flex align-items-center" *ngIf="isAuthenticated">
-          <li class="text">Hello, {{ username }}</li>
-        </div>
 
         <li class="nav-item">
           <button
             class="btn btn-primary"
             type="button"
-            (click)="handleLoginClick()"
+            (click)="handleSignUpClick()"
             *ngIf="!isAuthenticated"
           >
-            Login
+            Sign Up
           </button>
           <button
             class="btn btn-primary"

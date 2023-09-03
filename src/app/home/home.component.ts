@@ -1,3 +1,5 @@
+import { Movie, StoredTopMoviesData } from '../models/movie.model';
+
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { MovieService } from '../home/movies.service';
@@ -18,7 +20,7 @@ export class HomeComponent {
     private snackbarService: SnackbarService
   ) {}
 
-  topMovies: any;
+  topMovies: Movie[] = [];
   title: string = 'Top Rated Movies';
 
   ngOnInit() {
@@ -29,19 +31,27 @@ export class HomeComponent {
   }
 
   getTopMovies() {
-    const storedData = localStorage.getItem('topMoviesData');
+    const storedData: string | null = localStorage.getItem('topMoviesData');
     if (storedData) {
-      const parsedData = JSON.parse(storedData);
+      if (this.getTopMoviesFromLocalStorage(storedData)) {
+        return;
+      }
+    }
+    this.fetchTopMovies();
+  }
+
+  getTopMoviesFromLocalStorage(storedData: string): boolean {
+    if (storedData) {
+      const parsedData: StoredTopMoviesData = JSON.parse(storedData);
       const timestamp = parsedData.timestamp;
       const data = parsedData.data;
+
       if (Date.now() - timestamp < 12 * 60 * 60 * 1000) {
         this.topMovies = data;
-      } else {
-        this.getTopMovies();
+        return true;
       }
-    } else {
-      this.getTopMovies();
     }
+    return false;
   }
 
   fetchTopMovies() {
@@ -56,7 +66,7 @@ export class HomeComponent {
     );
   }
 
-  storeDataToLocalStorage(data: any) {
+  storeDataToLocalStorage(data: Movie[]) {
     const dataToStore = {
       timestamp: Date.now(),
       data: data,
@@ -90,7 +100,7 @@ export class HomeComponent {
     );
   }
 
-  handleViewMovieDetails(movieId: string) {
+  handleViewMovieDetails(movieId: number) {
     this.router.navigate(['/movie', movieId]);
   }
 }

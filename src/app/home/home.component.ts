@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  isLoading: boolean = false;
   constructor(
     private movieService: MovieService,
     private router: Router,
@@ -25,13 +26,12 @@ export class HomeComponent {
     });
   }
 
-  getTopMoviesFromLocalStorage() {
+  getTopMovies() {
     const storedData = localStorage.getItem('topMoviesData');
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       const timestamp = parsedData.timestamp;
       const data = parsedData.data;
-
       if (Date.now() - timestamp < 12 * 60 * 60 * 1000) {
         this.topMovies = data;
       } else {
@@ -42,7 +42,7 @@ export class HomeComponent {
     }
   }
 
-  getTopMovies() {
+  fetchTopMovies() {
     this.movieService.getTopMovies().subscribe((data) => {
       this.topMovies = data.results;
       this.storeDataToLocalStorage(data.results);
@@ -58,15 +58,30 @@ export class HomeComponent {
   }
 
   handleSearch(query: string) {
+    const spinnerTimeout = setTimeout(() => {
+      this.isLoading = true;
+    }, 100);
+
     if (query === '' || query == undefined) {
       this.title = 'Top Rated Movies';
-      this.getTopMoviesFromLocalStorage();
+      this.getTopMovies();
+      clearTimeout(spinnerTimeout);
+      this.isLoading = false;
       return;
     }
-    this.movieService.searchMovies(query).subscribe((data) => {
-      this.topMovies = data.results;
-      this.title = 'Search Results';
-    });
+    this.movieService.searchMovies(query).subscribe(
+      (data) => {
+        this.topMovies = data.results;
+        this.title = 'Search Results';
+        clearTimeout(spinnerTimeout);
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error fetching search results:', error);
+        clearTimeout(spinnerTimeout);
+        this.isLoading = false;
+      }
+    );
   }
 
   handleViewMovieDetails(movieId: string) {

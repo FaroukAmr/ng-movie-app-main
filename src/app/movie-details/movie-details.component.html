@@ -1,26 +1,27 @@
-<div class="movie-details-container" *ngIf="movieDetails; else loadingTemplate">
+<div class="container" *ngIf="movieDetails; else loadingTemplate">
   <div class="movie-title">{{ movieDetails.title }}</div>
+  <div class="info-container">
+    <span class="date">{{ movieDetails.release_date.split("-")[0] }}</span>
+    <span *ngFor="let genre of movieDetails.genres" class="genre">
+      {{ genre.name }}
+    </span>
+    <span
+      class="rating"
+      [ngStyle]="{ color: getColorForRating(movieDetails.vote_average) }"
+    >
+      {{ movieDetails.vote_average.toFixed(2)
+      }}<span style="color: black">/10</span>
+    </span>
+    <span style="color: black">({{ movieDetails.vote_count }} votes)</span>
+  </div>
+
   <img
     [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
     alt="{{ movieDetails.title }}"
     class="movie-poster"
   />
-  <div>
-    <div class="header">Overview:</div>
-    <div>{{ movieDetails.overview }}</div>
-  </div>
-
-  <div>
-    <div class="header">Release Date:</div>
-    <div>{{ movieDetails.release_date }}</div>
-  </div>
-
-  <div>
-    <div class="header">Vote Average:</div>
-    <div>{{ movieDetails.vote_average }}</div>
-  </div>
+  <div class="movie-overview">{{ movieDetails.overview }}</div>
 </div>
-
 <ng-template #loadingTemplate>
   <div class="loading">
     <p>Loading movie details...</p>

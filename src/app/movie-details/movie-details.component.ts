@@ -27,11 +27,22 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieDetails(movieId).subscribe(
         (data) => {
           this.movieDetails = data;
+          console.log(data);
         },
         (error) => {
           console.error('Error fetching movie details:', error);
         }
       );
+    }
+  }
+
+  getColorForRating(voteAverage: number): string {
+    if (voteAverage >= 7) {
+      return 'green';
+    } else if (voteAverage >= 4) {
+      return 'yellow';
+    } else {
+      return 'red';
     }
   }
 }

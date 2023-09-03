@@ -46,7 +46,7 @@ export class NavbarComponent implements OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  handleSearch(movieId: string) {
-    this.router.navigate(['/', movieId]);
+  handleSearch(query: string) {
+    this.router.navigate([''], { queryParams: { query: query } });
   }
 }

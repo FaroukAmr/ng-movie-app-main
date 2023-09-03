@@ -34,4 +34,14 @@ export class MovieDetailsComponent implements OnInit {
       );
     }
   }
+
+  getColorForRating(voteAverage: number): string {
+    if (voteAverage >= 7) {
+      return 'green';
+    } else if (voteAverage >= 4) {
+      return 'yellow';
+    } else {
+      return 'red';
+    }
+  }
 }

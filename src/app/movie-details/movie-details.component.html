@@ -1,15 +1,28 @@
-<div *ngIf="movieDetails">
-  <h1>{{ movieDetails.title }}</h1>
+<div class="movie-details-container" *ngIf="movieDetails; else loadingTemplate">
+  <div class="movie-title">{{ movieDetails.title }}</div>
   <img
     [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
     alt="{{ movieDetails.title }}"
+    class="movie-poster"
   />
+  <div>
+    <div class="header">Overview:</div>
+    <div>{{ movieDetails.overview }}</div>
+  </div>
 
-  <h3>Overview: {{ movieDetails.overview }}</h3>
-  <p><strong>Release Date:</strong> {{ movieDetails.release_date }}</p>
-  <p><strong>Vote Average:</strong> {{ movieDetails.vote_average }}</p>
+  <div>
+    <div class="header">Release Date:</div>
+    <div>{{ movieDetails.release_date }}</div>
+  </div>
+
+  <div>
+    <div class="header">Vote Average:</div>
+    <div>{{ movieDetails.vote_average }}</div>
+  </div>
 </div>
 
-<div *ngIf="!movieDetails">
-  <p>Loading movie details...</p>
-</div>
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <p>Loading movie details...</p>
+  </div>
+</ng-template>

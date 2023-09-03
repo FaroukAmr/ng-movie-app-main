@@ -27,7 +27,6 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getMovieDetails(movieId).subscribe(
         (data) => {
           this.movieDetails = data;
-          console.log(data);
         },
         (error) => {
           console.error('Error fetching movie details:', error);

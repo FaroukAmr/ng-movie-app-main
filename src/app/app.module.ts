@@ -8,14 +8,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the MatProgressSpinnerModule
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, MovieDetailsComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    MovieDetailsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +29,7 @@ firebase.initializeApp(environment.firebase);
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
 

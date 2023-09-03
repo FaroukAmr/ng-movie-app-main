@@ -10,6 +10,7 @@ import { MovieService } from '../home/movies.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movieDetails: any;
+  isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService
@@ -23,13 +24,21 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovieDetails(movieId: string) {
+    const spinnerTimeout = setTimeout(() => {
+      this.isLoading = true;
+    }, 100);
+
     if (movieId) {
       this.movieService.getMovieDetails(movieId).subscribe(
         (data) => {
           this.movieDetails = data;
+          clearTimeout(spinnerTimeout);
+          this.isLoading = false;
         },
         (error) => {
           console.error('Error fetching movie details:', error);
+          clearTimeout(spinnerTimeout);
+          this.isLoading = false;
         }
       );
     }

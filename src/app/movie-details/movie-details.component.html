@@ -1,4 +1,4 @@
-<div class="container" *ngIf="movieDetails; else loadingTemplate">
+<div class="container" *ngIf="!isLoading; else loadingTemplate">
   <div class="movie-title">{{ movieDetails.title }}</div>
   <div class="info-container">
     <div class="date">{{ movieDetails.release_date.split("-")[0] }}</div>
@@ -23,7 +23,7 @@
   <div class="movie-overview">{{ movieDetails.overview }}</div>
 </div>
 <ng-template #loadingTemplate>
-  <div class="loading">
-    <p>Loading movie details...</p>
+  <div class="loading-spinner-overlay">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
 </ng-template>

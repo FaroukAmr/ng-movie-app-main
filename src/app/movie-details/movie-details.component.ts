@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { Movie } from '../models/movie.model';
 import { MovieService } from '../home/movies.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MovieService } from '../home/movies.service';
   styleUrls: ['./movie-details.component.css'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movieDetails: any;
+  movieDetails: Movie = {} as Movie;
   isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,7 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getMovieDetails(movieId: string) {
+  getMovieDetails(movieId: string): void {
     const spinnerTimeout = setTimeout(() => {
       this.isLoading = true;
     }, 100);
@@ -34,6 +35,7 @@ export class MovieDetailsComponent implements OnInit {
           this.movieDetails = data;
           clearTimeout(spinnerTimeout);
           this.isLoading = false;
+          console.log('Movie details:', data);
         },
         (error) => {
           console.error('Error fetching movie details:', error);

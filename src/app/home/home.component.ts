@@ -22,9 +22,9 @@ export class HomeComponent {
   title: string = 'Top Rated Movies';
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const movieId = params['id'];
-      this.handleSearch(movieId);
+    this.route.queryParamMap.subscribe((params) => {
+      const query = params.get('query');
+      this.handleSearch(query);
     });
   }
 
@@ -64,12 +64,11 @@ export class HomeComponent {
     localStorage.setItem('topMoviesData', JSON.stringify(dataToStore));
   }
 
-  handleSearch(query: string) {
+  handleSearch(query: string | null) {
     const spinnerTimeout = setTimeout(() => {
       this.isLoading = true;
     }, 100);
-
-    if (query === '' || query == undefined) {
+    if (query === '' || query == undefined || query == null) {
       this.title = 'Top Rated Movies';
       this.getTopMovies();
       clearTimeout(spinnerTimeout);

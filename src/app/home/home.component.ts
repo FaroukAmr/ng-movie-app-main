@@ -1,6 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { MovieService } from '../home/movies.service';
-import { SearchService } from '../search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +11,17 @@ import { SearchService } from '../search.service';
 export class HomeComponent {
   constructor(
     private movieService: MovieService,
-    private searchService: SearchService
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   topMovies: any;
   title: string = 'Top Rated Movies';
 
   ngOnInit() {
-    this.getTopMoviesFromLocalStorage();
-    this.searchService.searchQuery$.subscribe((query) => {
-      this.handleSearch(query);
+    this.route.params.subscribe((params) => {
+      const movieId = params['id'];
+      this.handleSearch(movieId);
     });
   }
 
@@ -56,7 +58,7 @@ export class HomeComponent {
   }
 
   handleSearch(query: string) {
-    if (query === '') {
+    if (query === '' || query == undefined) {
       this.title = 'Top Rated Movies';
       this.getTopMoviesFromLocalStorage();
       return;
@@ -65,5 +67,9 @@ export class HomeComponent {
       this.topMovies = data.results;
       this.title = 'Search Results';
     });
+  }
+
+  handleViewMovieDetails(movieId: string) {
+    this.router.navigate(['/movie', movieId]);
   }
 }

@@ -13,7 +13,12 @@
         <div class="card-body">
           <h3 class="card-title">{{ movie.title }}</h3>
           <p class="card-text">{{ movie.overview }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div
+            class="btn btn-primary"
+            (click)="handleViewMovieDetails(movie.id)"
+          >
+            View Details
+          </div>
         </div>
       </div>
     </div>

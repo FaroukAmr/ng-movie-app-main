@@ -20,4 +20,9 @@ export class MovieService {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${query}`;
     return this.http.get(searchUrl);
   }
+
+  getMovieDetails(id: string): Observable<any> {
+    const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${this.apiKey}`;
+    return this.http.get(movieDetailsUrl);
+  }
 }

@@ -11,10 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 firebase.initializeApp(environment.firebase);
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, MovieDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

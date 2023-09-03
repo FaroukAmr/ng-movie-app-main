@@ -1,0 +1,15 @@
+<div *ngIf="movieDetails">
+  <h1>{{ movieDetails.title }}</h1>
+  <img
+    [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
+    alt="{{ movieDetails.title }}"
+  />
+
+  <h3>Overview: {{ movieDetails.overview }}</h3>
+  <p><strong>Release Date:</strong> {{ movieDetails.release_date }}</p>
+  <p><strong>Vote Average:</strong> {{ movieDetails.vote_average }}</p>
+</div>
+
+<div *ngIf="!movieDetails">
+  <p>Loading movie details...</p>
+</div>

@@ -1,6 +1,6 @@
 .card-body {
-  max-height: 15rem;
-  overflow: auto;
+  /* max-height: 15rem;
+  overflow: auto; */
 }
 
 .card-body::-webkit-scrollbar {

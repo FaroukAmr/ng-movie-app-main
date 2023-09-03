@@ -59,13 +59,13 @@
             placeholder="Search Movies"
             aria-label="Search"
             #searchInput
-            (keyup.enter)="searchMovies(searchInput.value)"
+            (keyup.enter)="handleSearch(searchInput.value)"
           />
           <div class="input-group-append" style="margin-left: 1px">
             <button
               class="btn btn-outline-success"
               type="button"
-              (click)="searchMovies(searchInput.value)"
+              (click)="handleSearch(searchInput.value)"
             >
               Search
             </button>

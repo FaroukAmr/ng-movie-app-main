@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 
 import { AuthenticationService } from '../authentication/authentication.service';
 import { Router } from '@angular/router';
-import { SearchService } from '../search.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,8 +15,7 @@ export class NavbarComponent implements OnDestroy {
   private userSubscription: Subscription = new Subscription();
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
-    private searchService: SearchService
+    private authService: AuthenticationService
   ) {
     this.userSubscription = this.authService.user$.subscribe((user) => {
       if (user) {
@@ -48,8 +46,7 @@ export class NavbarComponent implements OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  searchMovies(query: string) {
-    console.log(query);
-    this.searchService.setSearchQuery(query);
+  handleSearch(movieId: string) {
+    this.router.navigate(['/', movieId]);
   }
 }

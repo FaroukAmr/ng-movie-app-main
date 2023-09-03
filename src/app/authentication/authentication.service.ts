@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

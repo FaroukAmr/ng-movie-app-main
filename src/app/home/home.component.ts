@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { MovieService } from '../home/movies.service';
 import { Router } from '@angular/router';
+import { SnackbarService } from '../snackbar.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent {
   constructor(
     private movieService: MovieService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbarService: SnackbarService
   ) {}
 
   topMovies: any;
@@ -43,10 +45,15 @@ export class HomeComponent {
   }
 
   fetchTopMovies() {
-    this.movieService.getTopMovies().subscribe((data) => {
-      this.topMovies = data.results;
-      this.storeDataToLocalStorage(data.results);
-    });
+    this.movieService.getTopMovies().subscribe(
+      (data) => {
+        this.topMovies = data.results;
+        this.storeDataToLocalStorage(data.results);
+      },
+      (error) => {
+        this.snackbarService.showError(error.message);
+      }
+    );
   }
 
   storeDataToLocalStorage(data: any) {
@@ -77,9 +84,9 @@ export class HomeComponent {
         this.isLoading = false;
       },
       (error) => {
-        console.error('Error fetching search results:', error);
         clearTimeout(spinnerTimeout);
         this.isLoading = false;
+        this.snackbarService.showError(error.message);
       }
     );
   }

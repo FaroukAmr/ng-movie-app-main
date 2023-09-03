@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/snackbar.service';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,6 +36,7 @@ export class LoginComponent {
         this.router.navigate(['/']);
       },
       (error) => {
+        this.snackbarService.showError(error);
         console.log(error);
       }
     );

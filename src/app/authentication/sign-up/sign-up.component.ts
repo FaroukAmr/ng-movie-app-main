@@ -8,6 +8,7 @@ import {
 import { AuthenticationService } from '../authentication.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/snackbar.service';
 import { User } from '../../models/user.model';
 
 function passwordMatchValidator(
@@ -38,7 +39,8 @@ export class SignUpComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {
     this.signupForm = this.fb.group(
       {
@@ -65,6 +67,7 @@ export class SignUpComponent {
         this.router.navigate(['auth', 'login']);
       });
     } catch (error) {
+      this.snackbarService.showError(error as string);
       console.log(error);
     }
   }

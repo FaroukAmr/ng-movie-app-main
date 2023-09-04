@@ -16,10 +16,19 @@
   </div>
 
   <img
+    *ngIf="movieDetails.poster_path; else defaultImage"
     [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
     alt="{{ movieDetails.title }}"
     class="movie-poster"
   />
+
+  <ng-template #defaultImage>
+    <img
+      src="../../assets/notfound.png"
+      alt="{{ movieDetails.title }}"
+      class="movie-poster"
+    />
+  </ng-template>
   <div class="movie-overview">{{ movieDetails.overview }}</div>
 </div>
 <ng-template #loadingTemplate>

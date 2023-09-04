@@ -10,7 +10,14 @@ import { MovieService } from '../home/movies.service';
   styleUrls: ['./movie-details.component.css'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movieDetails: Movie = {} as Movie;
+  movieDetails: Movie = {
+    genres: [],
+    id: 0,
+    overview: '',
+    release_date: '',
+    vote_average: 0,
+    vote_count: 0,
+  };
   isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +45,7 @@ export class MovieDetailsComponent implements OnInit {
           console.log('Movie details:', data);
         },
         (error) => {
-          console.error('Error fetching movie details:', error);
+          console.error(error);
           clearTimeout(spinnerTimeout);
           this.isLoading = false;
         }

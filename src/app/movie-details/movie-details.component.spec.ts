@@ -4,6 +4,7 @@ import { of, throwError } from 'rxjs'; // Import throwError
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MovieDetailsComponent } from './movie-details.component';
+import { MovieRating } from './movie-details.component';
 import { MovieService } from '../home/movies.service';
 
 describe('MovieDetailsComponent', () => {
@@ -39,7 +40,7 @@ describe('MovieDetailsComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({ id: '1' }), // Simulate ActivatedRoute params
+            params: of({ id: '1' }),
           },
         },
         {
@@ -81,17 +82,17 @@ describe('MovieDetailsComponent', () => {
 
   it('should return green color for voteAverage >= 7', () => {
     const color = component.getColorForRating(7.5);
-    expect(color).toBe('green');
+    expect(color).toBe(MovieRating.HIGH);
   });
 
   it('should return yellow color for 4 <= voteAverage < 7', () => {
     const color = component.getColorForRating(5.5);
-    expect(color).toBe('yellow');
+    expect(color).toBe(MovieRating.MEDIUM);
   });
 
   it('should return red color for voteAverage < 4', () => {
     const color = component.getColorForRating(3.5);
-    expect(color).toBe('red');
+    expect(color).toBe(MovieRating.LOW);
   });
 
   it(`should call getMovieDetails when component is initialized`, () => {

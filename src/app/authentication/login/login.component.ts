@@ -27,6 +27,10 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    if (this.loginForm.invalid) {
+      this.snackbarService.showError('Invalid input');
+      return;
+    }
     const user: User = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,

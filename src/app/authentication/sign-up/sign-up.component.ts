@@ -54,6 +54,10 @@ export class SignUpComponent {
   }
 
   async onSubmit() {
+    if (this.signupForm.invalid) {
+      return;
+    }
+
     const user: User = {
       username: this.signupForm.value.username,
       email: this.signupForm.value.email,

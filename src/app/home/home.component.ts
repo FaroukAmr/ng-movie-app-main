@@ -41,15 +41,13 @@ export class HomeComponent {
   }
 
   getTopMoviesFromLocalStorage(storedData: string): boolean {
-    if (storedData) {
-      const parsedData: StoredTopMoviesData = JSON.parse(storedData);
-      const timestamp = parsedData.timestamp;
-      const data = parsedData.data;
+    const parsedData: StoredTopMoviesData = JSON.parse(storedData);
+    const timestamp = parsedData.timestamp;
+    const data = parsedData.data;
 
-      if (Date.now() - timestamp < 12 * 60 * 60 * 1000) {
-        this.topMovies = data;
-        return true;
-      }
+    if (Date.now() - timestamp < 12 * 60 * 60 * 1000) {
+      this.topMovies = data;
+      return true;
     }
     return false;
   }

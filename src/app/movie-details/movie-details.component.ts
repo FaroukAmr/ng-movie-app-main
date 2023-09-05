@@ -4,13 +4,27 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MovieService } from '../home/movies.service';
 
+export enum MovieRating {
+  HIGH = 'green',
+  MEDIUM = 'yellow',
+  LOW = 'red',
+}
+
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movieDetails: Movie = {} as Movie;
+  movieDetails: Movie = {
+    genres: [],
+    id: 0,
+    overview: '',
+    release_date: '',
+    vote_average: 0,
+    vote_count: 0,
+  };
+
   isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +52,7 @@ export class MovieDetailsComponent implements OnInit {
           console.log('Movie details:', data);
         },
         (error) => {
-          console.error('Error fetching movie details:', error);
+          console.error(error);
           clearTimeout(spinnerTimeout);
           this.isLoading = false;
         }
@@ -48,11 +62,11 @@ export class MovieDetailsComponent implements OnInit {
 
   getColorForRating(voteAverage: number): string {
     if (voteAverage >= 7) {
-      return 'green';
+      return MovieRating.HIGH;
     }
     if (voteAverage >= 4) {
-      return 'yellow';
+      return MovieRating.MEDIUM;
     }
-    return 'red';
+    return MovieRating.LOW;
   }
 }

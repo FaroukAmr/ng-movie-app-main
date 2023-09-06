@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnDestroy {
   isAuthenticated: boolean = false;
   username: string = '';
+  searachQuery: string = '';
   private userSubscription: Subscription = new Subscription();
   constructor(
     private router: Router,
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   navigateToHome() {
+    this.searachQuery = '';
     this.router.navigate(['/']);
   }
 

@@ -3,7 +3,9 @@
   style="background-color: #e3f2fd"
 >
   <div class="container-fluid">
-    <div class="navbar-brand" *ngIf="username != ''">Hello, {{ username }}</div>
+    <div class="navbar-brand" *ngIf="username != ''">
+      {{ "hello" | translate }} {{ username }}
+    </div>
 
     <button
       class="navbar-toggler"
@@ -28,8 +30,33 @@
             (click)="navigateToHome()"
             *ngIf="isAuthenticated"
           >
-            Home
+            {{ "home" | translate }}
           </button>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ "currentLanguage" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <div class="dropdown-item" (click)="selectLanguage('en')">
+                English
+              </div>
+            </li>
+            <li>
+              <div class="dropdown-item" (click)="selectLanguage('ar')">
+                Arabic
+              </div>
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item">
@@ -39,7 +66,7 @@
             (click)="handleSignUpClick()"
             *ngIf="!isAuthenticated"
           >
-            Sign Up
+            {{ "signUp" | translate }}
           </button>
           <button
             class="btn btn-primary"
@@ -47,7 +74,7 @@
             (click)="handleLogoutClick()"
             *ngIf="isAuthenticated"
           >
-            Logout
+            {{ "logout" | translate }}
           </button>
         </li>
       </ul>
@@ -56,9 +83,9 @@
           <input
             class="form-control"
             type="search"
-            placeholder="Search Movies"
+            [placeholder]="'searchMovies' | translate"
             aria-label="Search"
-            [(ngModel)]="searachQuery"
+            [(ngModel)]="searchQuery"
             #searchInput
             (keyup.enter)="handleSearch(searchInput.value)"
           />
@@ -68,7 +95,7 @@
               type="button"
               (click)="handleSearch(searchInput.value)"
             >
-              Search
+              {{ "search" | translate }}
             </button>
           </div>
         </div>

@@ -1,0 +1,29 @@
+{
+  "dir": "ltr",
+  "home": "Home",
+  "login": "Login",
+  "currentLanguage": "English",
+  "topRatedMovies": "Top Rated Movies",
+  "viewDetails": "View Details",
+  "searchResults": "Search Results",
+  "hello": "Hello,",
+  "searchMovies": "Search Movies",
+  "search": "Search",
+  "logout": "Logout",
+  "signUp": "Sign Up",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "username": "Username",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "validators": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "password": "Password must be at least 6 characters long",
+    "confirmPassword": "Passwords must match",
+    "username": "Username must be at least 3 characters long"
+  },
+  "notFound404": "Not Found - 404",
+  "notFoundUrl": "the requested URL",
+  "notFound": "does not exist"
+}

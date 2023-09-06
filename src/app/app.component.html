@@ -1,4 +1,6 @@
-<app-navbar></app-navbar>
-<main class="mt-5">
-  <router-outlet></router-outlet>
-</main>
+<div [dir]="'dir' | translate">
+  <app-navbar></app-navbar>
+  <main class="mt-5">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -5,6 +5,7 @@ import { of, throwError } from 'rxjs';
 import { HomeComponent } from './home.component';
 import { MovieService } from '../home/movies.service';
 import { SnackbarService } from '../snackbar.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -24,6 +25,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       declarations: [HomeComponent],
       providers: [
         { provide: MovieService, useValue: movieServiceMock },

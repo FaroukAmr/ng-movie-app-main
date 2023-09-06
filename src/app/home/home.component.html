@@ -1,6 +1,11 @@
 <div class="container" *ngIf="!isLoading; else loadingTemplate">
   <div>
-    <div class="title mb-4">{{ title }}</div>
+    <div *ngIf="isQuery" class="title mb-4">
+      {{ "searchResults" | translate }}
+    </div>
+    <div *ngIf="!isQuery" class="title mb-4">
+      {{ "topRatedMovies" | translate }}
+    </div>
   </div>
   <div class="row">
     <div *ngFor="let movie of topMovies" class="col-sm-6 col-md-4 col-lg-3">
@@ -26,7 +31,7 @@
             class="btn btn-primary"
             (click)="handleViewMovieDetails(movie.id)"
           >
-            View Details
+            {{ "viewDetails" | translate }}
           </div>
         </div>
       </div>

@@ -7,20 +7,25 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NgModule } from '@angular/core';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UserGuard } from './authentication/user.guard';
+import { inject } from '@angular/core';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [() => inject(AuthGuard).canActivate()],
+  },
   {
     path: 'auth',
     loadChildren: () => AuthenticationModule,
-    canActivate: [UserGuard],
+    canActivate: [() => inject(UserGuard).canActivate()],
   },
   { path: 'login', redirectTo: 'auth/login' },
   { path: 'register', redirectTo: 'auth/register' },
   {
     path: 'movie/:id',
     component: MovieDetailsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [() => inject(AuthGuard).canActivate()],
   },
   { path: '**', component: NotFoundComponent },
 ];

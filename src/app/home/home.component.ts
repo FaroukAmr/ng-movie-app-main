@@ -82,7 +82,7 @@ export class HomeComponent implements OnDestroy {
     }, 100);
     if (query === '' || query == undefined || query == null) {
       this.isQuery = false;
-      this.titleService.setTitle(`test`);
+      this.titleService.setTitle(`Top Movies`);
       this.getTopMovies();
       clearTimeout(spinnerTimeout);
       this.isLoading = false;

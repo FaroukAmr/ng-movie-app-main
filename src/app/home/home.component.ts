@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Movie, StoredTopMoviesData } from '../models/movie.model';
 
 import { ActivatedRoute } from '@angular/router';
@@ -6,7 +7,6 @@ import { MovieService } from '../home/movies.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../snackbar.service';
 import { Title } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -15,27 +15,44 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomeComponent implements OnDestroy {
   isLoading: boolean = false;
-  isQuery: boolean = false;
+  query: string = '';
+  private currentLanguage = localStorage.getItem('currentLanguage') || 'en';
   constructor(
     private movieService: MovieService,
     private router: Router,
     private route: ActivatedRoute,
     private snackbarService: SnackbarService,
     private titleService: Title,
-    private translateService: TranslateService
-  ) {}
+    private translate: TranslateService
+  ) {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.currentLanguage = event.lang;
+      if (this.query === '') {
+        this.getTopMovies();
+      } else {
+        this.handleSearch();
+      }
+    });
+  }
 
   topMovies: Movie[] = [];
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
-      const query = params.get('query');
-      this.handleSearch(query);
+      const qP = params.get('query');
+      this.query = qP ? qP : '';
+      if (this.query === '') {
+        this.getTopMovies();
+      } else {
+        this.handleSearch();
+      }
     });
   }
 
   getTopMovies() {
-    const storedData: string | null = localStorage.getItem('topMoviesData');
+    const storedData: string | null = localStorage.getItem(
+      'topMoviesData-' + this.currentLanguage
+    );
     if (storedData) {
       if (this.getTopMoviesFromLocalStorage(storedData)) {
         return;
@@ -57,7 +74,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   fetchTopMovies() {
-    this.movieService.getTopMovies().subscribe(
+    this.movieService.getTopMovies(this.currentLanguage).subscribe(
       (data) => {
         this.topMovies = data.results;
         this.storeDataToLocalStorage(data.results);
@@ -73,15 +90,17 @@ export class HomeComponent implements OnDestroy {
       timestamp: Date.now(),
       data: data,
     };
-    localStorage.setItem('topMoviesData', JSON.stringify(dataToStore));
+    localStorage.setItem(
+      'topMoviesData-' + this.currentLanguage,
+      JSON.stringify(dataToStore)
+    );
   }
 
-  handleSearch(query: string | null) {
+  handleSearch() {
     const spinnerTimeout = setTimeout(() => {
       this.isLoading = true;
     }, 100);
-    if (query === '' || query == undefined || query == null) {
-      this.isQuery = false;
+    if (this.query === '') {
       this.titleService.setTitle(`Top Movies`);
       this.getTopMovies();
       clearTimeout(spinnerTimeout);
@@ -89,13 +108,10 @@ export class HomeComponent implements OnDestroy {
       return;
     }
 
-    this.isQuery = true;
-    this.movieService.searchMovies(query).subscribe(
+    this.movieService.searchMovies(this.query, this.currentLanguage).subscribe(
       (data) => {
         this.topMovies = data.results;
-
-        this.titleService.setTitle(`Search Results for "${query}"`);
-
+        this.titleService.setTitle(`Search Results for "${this.query}"`);
         clearTimeout(spinnerTimeout);
         this.isLoading = false;
       },

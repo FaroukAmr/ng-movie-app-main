@@ -1,9 +1,9 @@
 <div class="container" *ngIf="!isLoading; else loadingTemplate">
   <div>
-    <div *ngIf="isQuery" class="title mb-4">
+    <div *ngIf="query != ''" class="title mb-4">
       {{ "searchResults" | translate }}
     </div>
-    <div *ngIf="!isQuery" class="title mb-4">
+    <div *ngIf="query == ''" class="title mb-4">
       {{ "topRatedMovies" | translate }}
     </div>
   </div>

@@ -28,8 +28,12 @@ export class HomeComponent implements OnDestroy {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.currentLanguage = event.lang;
       if (this.query === '') {
+        this.titleService.setTitle(this.translate.instant('topRatedMovies'));
         this.getTopMovies();
       } else {
+        this.titleService.setTitle(
+          this.translate.instant('search') + ` ${this.query}`
+        );
         this.handleSearch();
       }
     });
@@ -42,8 +46,12 @@ export class HomeComponent implements OnDestroy {
       const qP = params.get('query');
       this.query = qP ? qP : '';
       if (this.query === '') {
+        this.titleService.setTitle(this.translate.instant('topRatedMovies'));
         this.getTopMovies();
       } else {
+        this.titleService.setTitle(
+          this.translate.instant('search') + ` ${this.query}`
+        );
         this.handleSearch();
       }
     });
@@ -101,7 +109,6 @@ export class HomeComponent implements OnDestroy {
       this.isLoading = true;
     }, 100);
     if (this.query === '') {
-      this.titleService.setTitle(`Top Movies`);
       this.getTopMovies();
       clearTimeout(spinnerTimeout);
       this.isLoading = false;
@@ -111,7 +118,6 @@ export class HomeComponent implements OnDestroy {
     this.movieService.searchMovies(this.query, this.currentLanguage).subscribe(
       (data) => {
         this.topMovies = data.results;
-        this.titleService.setTitle(`Search Results for "${this.query}"`);
         clearTimeout(spinnerTimeout);
         this.isLoading = false;
       },
@@ -128,6 +134,6 @@ export class HomeComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.titleService.setTitle(`Movie App`);
+    this.titleService.setTitle(this.translate.instant('movieApp'));
   }
 }

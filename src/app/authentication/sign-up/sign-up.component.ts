@@ -4,11 +4,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../authentication.service';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/snackbar.service';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
 
 function passwordMatchValidator(
@@ -33,14 +35,16 @@ function passwordMatchValidator(
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private translate: TranslateService,
+    private titleService: Title
   ) {
     this.signupForm = this.fb.group(
       {
@@ -51,6 +55,13 @@ export class SignUpComponent {
       },
       { validator: passwordMatchValidator }
     );
+
+    this.translate.onLangChange.subscribe(() => {
+      this.titleService.setTitle(this.translate.instant('signUp'));
+    });
+  }
+  ngOnInit() {
+    this.titleService.setTitle(this.translate.instant('signUp'));
   }
 
   async onSubmit() {

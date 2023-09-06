@@ -19,6 +19,7 @@ describe('HomeComponent', () => {
 
   const translateServiceMock = {
     onLangChange: of({ lang: 'en' } as LangChangeEvent),
+    instant: (key: string) => key, // Mock the instant method to return the key as is
   };
 
   const activatedRouteMock = {
@@ -102,8 +103,20 @@ describe('HomeComponent', () => {
     expect(movieSpy).toHaveBeenCalledWith(query, component['currentLanguage']);
   });
 
-  it('should store top movies data in localStorage', () => {
-    const data = [{ id: 1, title: 'test' }] as Movie[];
+  it('should store current language top movies data in localStorage', () => {
+    const data: Movie[] = [
+      {
+        id: 1,
+        title: 'test',
+        genres: [{ id: 1, name: 'test' }],
+        overview: '',
+        poster_path: '',
+        release_date: '',
+        vote_average: 1,
+        vote_count: 1,
+      },
+    ];
+
     const dataToStore = {
       timestamp: Date.now(),
       data: data,
@@ -117,7 +130,7 @@ describe('HomeComponent', () => {
     component.ngOnInit();
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
-      'topMoviesData-' + 'en',
+      'topMoviesData-' + component['currentLanguage'],
       dataToStoreString
     );
   });

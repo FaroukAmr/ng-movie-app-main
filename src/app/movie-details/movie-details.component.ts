@@ -26,6 +26,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     release_date: '',
     vote_average: 0,
     vote_count: 0,
+    title: '',
+    poster_path: '',
   };
 
   private movieId: string = '';

@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 
 export enum MovieRating {
   HIGH = 'green',
-  MEDIUM = 'yellow',
+  MEDIUM = 'orange',
   LOW = 'red',
 }
 

@@ -41,7 +41,11 @@ export class HomeComponent implements OnDestroy {
     this.route.queryParamMap.subscribe((params) => {
       const qP = params.get('query');
       this.query = qP ? qP : '';
-      this.handleSearch();
+      if (this.query === '') {
+        this.getTopMovies();
+      } else {
+        this.handleSearch();
+      }
     });
   }
 

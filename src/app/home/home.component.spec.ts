@@ -64,14 +64,6 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call handleSearch in ngOnInit', () => {
-    spyOn(component, 'handleSearch');
-
-    component.ngOnInit();
-
-    expect(component.handleSearch).toHaveBeenCalled();
-  });
-
   it('should call getTopMovies when query is empty in ngOnInit', () => {
     spyOn(component, 'getTopMovies');
 
@@ -120,11 +112,12 @@ describe('HomeComponent', () => {
 
     spyOn(localStorage, 'getItem').and.returnValue(null);
     spyOn(localStorage, 'setItem');
-
     component.storeDataToLocalStorage(data);
+    component['currentLanguage'] = 'en';
+    component.ngOnInit();
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
-      'topMoviesData-' + component['currentLanguage'],
+      'topMoviesData-' + 'en',
       dataToStoreString
     );
   });

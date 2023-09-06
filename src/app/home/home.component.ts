@@ -1,23 +1,25 @@
+import { Component, OnDestroy } from '@angular/core';
 import { Movie, StoredTopMoviesData } from '../models/movie.model';
 
 import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
 import { MovieService } from '../home/movies.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../snackbar.service';
+import { Title } from '@angular/platform-browser'; // Import the Title service
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
   isLoading: boolean = false;
   constructor(
     private movieService: MovieService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private titleService: Title
   ) {}
 
   topMovies: Movie[] = [];
@@ -78,6 +80,7 @@ export class HomeComponent {
     }, 100);
     if (query === '' || query == undefined || query == null) {
       this.title = 'Top Rated Movies';
+      this.titleService.setTitle(`${this.title}`);
       this.getTopMovies();
       clearTimeout(spinnerTimeout);
       this.isLoading = false;
@@ -87,6 +90,8 @@ export class HomeComponent {
       (data) => {
         this.topMovies = data.results;
         this.title = 'Search Results';
+        this.titleService.setTitle(`Search Results for "${query}"`);
+
         clearTimeout(spinnerTimeout);
         this.isLoading = false;
       },
@@ -100,5 +105,9 @@ export class HomeComponent {
 
   handleViewMovieDetails(movieId: number) {
     this.router.navigate(['/movie', movieId]);
+  }
+
+  ngOnDestroy() {
+    this.titleService.setTitle(`Movie App`);
   }
 }

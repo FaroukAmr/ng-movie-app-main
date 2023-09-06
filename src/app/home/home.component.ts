@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../home/movies.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../snackbar.service';
-import { Title } from '@angular/platform-browser'; // Import the Title service
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',

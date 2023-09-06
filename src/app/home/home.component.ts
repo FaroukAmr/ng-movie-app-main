@@ -42,6 +42,7 @@ export class HomeComponent implements OnDestroy {
   topMovies: Movie[] = [];
 
   ngOnInit() {
+    this.topMovies = [] as Movie[];
     this.route.queryParamMap.subscribe((params) => {
       const qP = params.get('query');
       this.query = qP ? qP : '';
@@ -88,6 +89,7 @@ export class HomeComponent implements OnDestroy {
         this.storeDataToLocalStorage(data.results);
       },
       (error) => {
+        this.topMovies = [] as Movie[];
         this.snackbarService.showError(error.message);
       }
     );

@@ -7,19 +7,28 @@ import {
 } from '@ngx-translate/core';
 
 import { HomeComponent } from './home.component';
+import { HttpClient } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Movie } from '../models/movie.model';
 import { MovieService } from '../home/movies.service';
 import { SnackbarService } from '../snackbar.service';
 import { Title } from '@angular/platform-browser';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
+export function httpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   const translateServiceMock = {
-    onLangChange: of({ lang: 'en' } as LangChangeEvent),
-    instant: (key: string) => key, // Mock the instant method to return the key as is
+    onLangChange: of({ lang: 'en', translations: '' }),
+    instant: (key: string) => key,
+    get: (key: string) => of('key'),
   };
 
   const activatedRouteMock = {
@@ -38,15 +47,49 @@ describe('HomeComponent', () => {
     setTitle: jasmine.createSpy('setTitle'),
   };
 
+  const mockData: Movie[] = [
+    {
+      id: 1,
+      title: 'Movie 1',
+      genres: [{ id: 1, name: 'action' }],
+      overview: 'some overview',
+      poster_path: 'some_path',
+      release_date: '2023-01-01',
+      vote_average: 5,
+      vote_count: 100,
+    },
+    {
+      id: 2,
+      title: 'Movie 2',
+      genres: [{ id: 1, name: 'drama' }],
+      overview: 'some overview',
+      poster_path: 'some_path',
+      release_date: '2023-02-02',
+      vote_average: 3,
+      vote_count: 20,
+    },
+  ];
+
   const movieServiceMock = {
-    getTopMovies: () => of([]),
+    getTopMovies: () => of([mockData]),
     searchMovies: (query: string, language: string) => of([]),
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [TranslateModule.forRoot()],
+      imports: [
+        TranslateModule.forRoot({
+          defaultLanguage: 'en',
+          loader: {
+            provide: TranslateLoader,
+            useFactory: httpLoaderFactory,
+            deps: [HttpClient],
+          },
+        }),
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+      ],
       providers: [
         { provide: TranslateService, useValue: translateServiceMock },
         { provide: ActivatedRoute, useValue: activatedRouteMock },
@@ -59,10 +102,21 @@ describe('HomeComponent', () => {
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display the loading spinner when isLoading is true', () => {
+    component.isLoading = true;
+    fixture.detectChanges();
+    const loadingSpinner = fixture.debugElement.nativeElement.querySelector(
+      '.loading-spinner-overlay'
+    );
+    expect(loadingSpinner).toBeTruthy();
   });
 
   it('should call getTopMovies when query is empty in ngOnInit', () => {
@@ -104,28 +158,15 @@ describe('HomeComponent', () => {
   });
 
   it('should store current language top movies data in localStorage', () => {
-    const data: Movie[] = [
-      {
-        id: 1,
-        title: 'test',
-        genres: [{ id: 1, name: 'test' }],
-        overview: '',
-        poster_path: '',
-        release_date: '',
-        vote_average: 1,
-        vote_count: 1,
-      },
-    ];
-
     const dataToStore = {
       timestamp: Date.now(),
-      data: data,
+      data: mockData,
     };
     const dataToStoreString = JSON.stringify(dataToStore);
 
     spyOn(localStorage, 'getItem').and.returnValue(null);
     spyOn(localStorage, 'setItem');
-    component.storeDataToLocalStorage(data);
+    component.storeDataToLocalStorage(mockData);
     component['currentLanguage'] = 'en';
     component.ngOnInit();
 

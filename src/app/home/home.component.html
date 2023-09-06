@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!isLoading; else loadingTemplate">
+<div class="container" *ngIf="!isLoading && topMovies; else loadingTemplate">
   <div>
     <div *ngIf="query != ''" class="title mb-4">
       {{ "searchResults" | translate }}

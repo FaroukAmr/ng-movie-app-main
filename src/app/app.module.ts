@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 
@@ -31,6 +32,7 @@ export function httpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     HomeComponent,
     MovieDetailsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

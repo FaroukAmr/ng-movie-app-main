@@ -6,6 +6,7 @@ import { AuthenticationService } from '../authentication.service';
 import { LoginComponent } from './login.component';
 import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/snackbar.service';
+import { TranslateModule } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
 
 describe('LoginComponent', () => {
@@ -23,7 +24,7 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, TranslateModule.forRoot()],
       providers: [
         FormBuilder,
         {

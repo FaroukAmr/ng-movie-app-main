@@ -1,9 +1,10 @@
 <div class="container">
   <div class="text-center cnt">
     <div>
-      <h1 class="display-4">404 - Not Found</h1>
+      <h1 class="display-4">{{ "notFound404" | translate }}</h1>
       <p class="lead">
-        The requested URL <b>/{{ displayedUrl }}</b> does not exist
+        {{ "notFoundUrl" | translate }} <b>/{{ displayedUrl }}</b>
+        {{ "notFound" | translate }}
       </p>
     </div>
 

@@ -22,5 +22,8 @@
     "password": "Password must be at least 6 characters long",
     "confirmPassword": "Passwords must match",
     "username": "Username must be at least 3 characters long"
-  }
+  },
+  "notFound404": "Not Found - 404",
+  "notFoundUrl": "the requested URL",
+  "notFound": "does not exist"
 }

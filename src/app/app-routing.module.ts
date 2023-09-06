@@ -10,7 +10,6 @@ import { UserGuard } from './authentication/user.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'auth',
     loadChildren: () => AuthenticationModule,

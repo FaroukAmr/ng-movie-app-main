@@ -1,8 +1,8 @@
 <div class="login-container">
-  <h2>Login</h2>
+  <h2>{{ "login" | translate }}</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
     <div>
-      <label for="username" class="form-label">Email</label>
+      <label for="username" class="form-label">{{ "email" | translate }}</label>
       <input
         type="text"
         id="email"
@@ -16,15 +16,17 @@
         "
       >
         <div *ngIf="loginForm.get('email')?.hasError('required')">
-          Email is required.
+          {{ "validators.required" | translate }}
         </div>
         <div *ngIf="loginForm.get('email')?.hasError('email')">
-          Invalid email format.
+          {{ "validators.email" | translate }}
         </div>
       </div>
     </div>
     <div>
-      <label for="password" class="form-label">Password</label>
+      <label for="password" class="form-label">{{
+        "password" | translate
+      }}</label>
       <input
         type="password"
         id="password"
@@ -39,10 +41,10 @@
         "
       >
         <div *ngIf="loginForm.get('password')?.hasError('required')">
-          Password is required.
+          {{ "validators.required" | translate }}
         </div>
         <div *ngIf="loginForm.get('password')?.hasError('minlength')">
-          Password should have at least 6 characters.
+          {{ "validators.password" | translate }}
         </div>
       </div>
     </div>
@@ -53,7 +55,7 @@
       [disabled]="loginForm.invalid"
       style="max-width: fit-content; align-self: flex-end"
     >
-      Login
+      {{ "login" | translate }}
     </button>
   </form>
 </div>

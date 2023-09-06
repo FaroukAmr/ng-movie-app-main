@@ -6,6 +6,7 @@ import { MovieService } from '../home/movies.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../snackbar.service';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -14,16 +15,17 @@ import { Title } from '@angular/platform-browser';
 })
 export class HomeComponent implements OnDestroy {
   isLoading: boolean = false;
+  isQuery: boolean = false;
   constructor(
     private movieService: MovieService,
     private router: Router,
     private route: ActivatedRoute,
     private snackbarService: SnackbarService,
-    private titleService: Title
+    private titleService: Title,
+    private translateService: TranslateService
   ) {}
 
   topMovies: Movie[] = [];
-  title: string = 'Top Rated Movies';
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
@@ -79,17 +81,19 @@ export class HomeComponent implements OnDestroy {
       this.isLoading = true;
     }, 100);
     if (query === '' || query == undefined || query == null) {
-      this.title = 'Top Rated Movies';
-      this.titleService.setTitle(`${this.title}`);
+      this.isQuery = false;
+      this.titleService.setTitle(`test`);
       this.getTopMovies();
       clearTimeout(spinnerTimeout);
       this.isLoading = false;
       return;
     }
+
+    this.isQuery = true;
     this.movieService.searchMovies(query).subscribe(
       (data) => {
         this.topMovies = data.results;
-        this.title = 'Search Results';
+
         this.titleService.setTitle(`Search Results for "${query}"`);
 
         clearTimeout(spinnerTimeout);

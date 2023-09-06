@@ -1,9 +1,11 @@
 <div class="sign-up-container">
-  <h2 style="text-align: center">Sign Up</h2>
+  <h2 style="text-align: center">{{ "signUp" | translate }}</h2>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form-container">
     <div class="form-row">
       <div class="form-field">
-        <label for="username" class="form-label">Username</label>
+        <label for="username" class="form-label">{{
+          "username" | translate
+        }}</label>
         <input
           type="text"
           id="username"
@@ -18,16 +20,16 @@
           "
         >
           <div *ngIf="signupForm.get('username')?.hasError('required')">
-            Username is required.
+            {{ "validators.required" | translate }}
           </div>
           <div *ngIf="signupForm.get('username')?.hasError('minlength')">
-            Username should have at least 3 characters.
+            {{ "validators.username" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-field">
-        <label for="email" class="form-label">Email</label>
+        <label for="email" class="form-label">{{ "email" | translate }}</label>
         <input
           type="email"
           id="email"
@@ -41,10 +43,10 @@
           "
         >
           <div *ngIf="signupForm.get('email')?.hasError('required')">
-            Email is required.
+            {{ "validators.required" | translate }}
           </div>
           <div *ngIf="signupForm.get('email')?.hasError('email')">
-            Invalid email format.
+            {{ "validators.email" | translate }}
           </div>
         </div>
       </div>
@@ -52,7 +54,9 @@
 
     <div class="form-row">
       <div class="form-field">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">{{
+          "password" | translate
+        }}</label>
         <input
           type="password"
           id="password"
@@ -67,16 +71,18 @@
           "
         >
           <div *ngIf="signupForm.get('password')?.hasError('required')">
-            Password is required.
+            {{ "validators.required" | translate }}
           </div>
           <div *ngIf="signupForm.get('password')?.hasError('minlength')">
-            Password should have at least 6 characters.
+            {{ "validators.password" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-field">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <label for="confirmPassword" class="form-label">{{
+          "confirmPassword" | translate
+        }}</label>
         <input
           type="password"
           id="confirmPassword"
@@ -90,17 +96,17 @@
             signupForm.get('confirmPassword')?.touched
           "
         >
-          Confirm Password is required.
+          {{ "validators.required" | translate }}
         </div>
 
         <div *ngIf="signupForm.hasError('passwordMismatch')">
-          Passwords do not match.
+          {{ "validators.confirmPassword" | translate }}
         </div>
       </div>
     </div>
     <div style="align-self: center">
-      Already have an account?
-      <a routerLink="/auth/login">Login</a>
+      {{ "alreadyHaveAnAccount" | translate }}
+      <a routerLink="/auth/login">{{ "login" | translate }}</a>
     </div>
 
     <button
@@ -110,7 +116,7 @@
       [disabled]="signupForm.invalid"
       style="max-width: 19rem; margin: auto"
     >
-      Sign Up
+      {{ "signUp" | translate }}
     </button>
   </form>
 </div>

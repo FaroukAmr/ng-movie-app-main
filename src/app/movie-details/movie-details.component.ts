@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MovieService } from '../home/movies.service';
+import { Title } from '@angular/platform-browser';
 
 export enum MovieRating {
   HIGH = 'green',
@@ -15,7 +16,7 @@ export enum MovieRating {
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css'],
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
   movieDetails: Movie = {
     genres: [],
     id: 0,
@@ -28,7 +29,8 @@ export class MovieDetailsComponent implements OnInit {
   isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private titleService: Title
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,9 @@ export class MovieDetailsComponent implements OnInit {
           this.movieDetails = data;
           clearTimeout(spinnerTimeout);
           this.isLoading = false;
-          console.log('Movie details:', data);
+          this.titleService.setTitle(
+            this.movieDetails.title || 'Movie Details'
+          );
         },
         (error) => {
           console.error(error);
@@ -68,5 +72,8 @@ export class MovieDetailsComponent implements OnInit {
       return MovieRating.MEDIUM;
     }
     return MovieRating.LOW;
+  }
+  ngOnDestroy() {
+    this.titleService.setTitle(`Movie App`);
   }
 }

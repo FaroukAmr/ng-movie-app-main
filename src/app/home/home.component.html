@@ -9,7 +9,11 @@
   </div>
   <div class="row">
     <div *ngFor="let movie of topMovies" class="col-sm-6 col-md-4 col-lg-3">
-      <div class="card mb-3" style="width: 100%">
+      <div
+        class="card mb-3"
+        style="width: 100%"
+        (click)="handleViewMovieDetails(movie.id)"
+      >
         <img
           *ngIf="movie.poster_path; else defaultImage"
           [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
@@ -27,12 +31,6 @@
         <div class="card-body">
           <h3 class="card-title">{{ movie.title }}</h3>
           <p class="card-text">{{ movie.overview }}</p>
-          <div
-            class="btn btn-primary"
-            (click)="handleViewMovieDetails(movie.id)"
-          >
-            {{ "viewDetails" | translate }}
-          </div>
         </div>
       </div>
     </div>

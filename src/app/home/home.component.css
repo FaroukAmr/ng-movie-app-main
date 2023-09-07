@@ -1,6 +1,23 @@
 .card-body {
-  /* max-height: 15rem;
-  overflow: auto; */
+  max-height: 16rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.card {
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 6px rgba(110, 110, 110, 0.5); /* Add a subtle shadow on hover */
+}
+
+.container {
+  padding-bottom: 3rem;
 }
 
 .card-body::-webkit-scrollbar {

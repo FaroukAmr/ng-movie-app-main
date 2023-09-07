@@ -11,6 +11,11 @@
           id="username"
           formControlName="username"
           class="form-control"
+          [ngClass]="{
+            error:
+              signupForm.get('username')?.invalid &&
+              signupForm.get('username')?.touched
+          }"
         />
         <div
           class="error-message"
@@ -35,6 +40,11 @@
           id="email"
           formControlName="email"
           class="form-control"
+          [ngClass]="{
+            error:
+              signupForm.get('email')?.invalid &&
+              signupForm.get('email')?.touched
+          }"
         />
         <div
           class="error-message"
@@ -62,6 +72,11 @@
           id="password"
           formControlName="password"
           class="form-control"
+          [ngClass]="{
+            error:
+              signupForm.get('password')?.invalid &&
+              signupForm.get('password')?.touched
+          }"
         />
         <div
           class="error-message"
@@ -88,6 +103,11 @@
           id="confirmPassword"
           formControlName="confirmPassword"
           class="form-control"
+          [ngClass]="{
+            error:
+              signupForm.get('confirmPassword')?.invalid &&
+              signupForm.get('confirmPassword')?.touched
+          }"
         />
 
         <div

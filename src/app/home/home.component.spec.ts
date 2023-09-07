@@ -164,10 +164,9 @@ describe('HomeComponent', () => {
     };
     const dataToStoreString = JSON.stringify(dataToStore);
 
-    spyOn(localStorage, 'getItem').and.returnValue(null);
     spyOn(localStorage, 'setItem');
-    component.storeDataToLocalStorage(mockData);
     component['currentLanguage'] = 'en';
+    component.storeDataToLocalStorage(mockData);
     component.ngOnInit();
 
     expect(localStorage.setItem).toHaveBeenCalledWith(

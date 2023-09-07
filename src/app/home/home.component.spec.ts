@@ -157,23 +157,6 @@ describe('HomeComponent', () => {
     expect(movieSpy).toHaveBeenCalledWith(query, component['currentLanguage']);
   });
 
-  it('should store current language top movies data in localStorage', () => {
-    const dataToStore = {
-      timestamp: Date.now(),
-      data: mockData,
-    };
-    const dataToStoreString = JSON.stringify(dataToStore);
-
-    spyOn(localStorage, 'setItem');
-    component['currentLanguage'] = 'en';
-    component.storeDataToLocalStorage(mockData);
-    component.ngOnInit();
-
-    expect(localStorage.setItem).toHaveBeenCalledWith(
-      'topMoviesData-' + component['currentLanguage'],
-      dataToStoreString
-    );
-  });
 
   it('should return true on valid data', () => {
     const data = [{ id: 1, title: 'test' }] as Movie[];

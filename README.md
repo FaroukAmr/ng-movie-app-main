@@ -43,7 +43,7 @@ Angular Movie App is designed to provide an easy and intuitive way to explore mo
 
 ## Technologies
 
-- Angular 11
+- Angular
 - Angular Material
 - Bootstrap
 - TheMovieDB API

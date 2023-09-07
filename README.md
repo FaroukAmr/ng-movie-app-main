@@ -4,6 +4,7 @@ Angular Movie App is an application that allows you to discover top-rated movies
 
 ## Table of Contents
 
+- [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
@@ -12,6 +13,10 @@ Angular Movie App is an application that allows you to discover top-rated movies
 - [Development server](#development-server)
 - [Running unit tests](#running-unit-tests)
 - [License](#license)
+
+## Demo
+
+A live demo of the application is available at https://faroukamr.github.io/ng-movie-app-main/
 
 ## Installation
 

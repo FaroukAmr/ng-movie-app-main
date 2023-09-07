@@ -20,8 +20,8 @@ A live demo of the application is available at https://faroukamr.github.io/ng-mo
 
 ## Installation
 
-- git `clone` https://github.com/FaroukAmr/ng-movie-app-main
-- `cd` ng-movie-app-main
+- `git clone https://github.com/FaroukAmr/ng-movie-app-main`
+- `cd ng-movie-app-main`
 - Run `npm install` to install all dependencies.
 
 ## Usage

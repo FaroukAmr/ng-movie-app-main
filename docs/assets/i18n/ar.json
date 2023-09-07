@@ -1,0 +1,31 @@
+{
+  "dir": "rtl",
+  "home": "الرئيسية",
+  "login": "تسجيل الدخول",
+  "currentLanguage": "العربية",
+  "topRatedMovies": "أعلى الأفلام تقييماً",
+  "searchResults": "نتائج البحث",
+  "viewDetails": "عرض التفاصيل",
+  "hello": "مرحباً,",
+  "searchMovies": "بحث عن الأفلام",
+  "search": "بحث",
+  "logout": "تسجيل الخروج",
+  "signUp": "اشتراك",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "username": "اسم المستخدم",
+  "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
+  "votes": "تصويت",
+  "validators": {
+    "required": "هذا الحقل مطلوب",
+    "email": "الرجاء إدخال عنوان بريد إلكتروني صحيح",
+    "password": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+    "confirmPassword": "يجب أن تتطابق كلمات المرور",
+    "username": "يجب أن يكون اسم المستخدم على الأقل 3 أحرف"
+  },
+  "notFound404": "غير موجود - 404",
+  "notFoundUrl": "عنوان الويب المطلوب",
+  "notFound": "غير موجود",
+  "movieApp": "تطبيق الأفلام"
+}

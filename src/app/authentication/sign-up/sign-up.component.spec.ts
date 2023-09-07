@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { of, throwError } from 'rxjs';
 
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { SignUpComponent } from './sign-up.component';
 import { SnackbarService } from 'src/app/snackbar.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
+import { of } from 'rxjs';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;

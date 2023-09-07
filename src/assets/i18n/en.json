@@ -15,6 +15,7 @@
   "password": "Password",
   "confirmPassword": "Confirm Password",
   "username": "Username",
+  "votes": "Votes",
   "alreadyHaveAnAccount": "Already have an account?",
   "validators": {
     "required": "This field is required",

@@ -16,6 +16,7 @@
   "confirmPassword": "تأكيد كلمة المرور",
   "username": "اسم المستخدم",
   "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
+  "votes": "تصويت",
   "validators": {
     "required": "هذا الحقل مطلوب",
     "email": "الرجاء إدخال عنوان بريد إلكتروني صحيح",

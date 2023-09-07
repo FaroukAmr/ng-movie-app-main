@@ -11,7 +11,9 @@
       [ngStyle]="{ color: getColorForRating(movieDetails.vote_average) }"
     >
       {{ movieDetails.vote_average.toFixed(2) }}
-      <div style="color: black">/10 ({{ movieDetails.vote_count }} votes)</div>
+      <div style="color: black">
+        /10 ({{ movieDetails.vote_count }} {{ "votes" | translate }} )
+      </div>
     </div>
   </div>
 

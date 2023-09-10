@@ -15,37 +15,27 @@ import { User } from '../../models/user.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  email: string = '';
+  password: string = '';
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
     private snackbarService: SnackbarService,
     private translate: TranslateService,
     private titleService: Title
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-    this.translate.onLangChange.subscribe(() => {
-      this.titleService.setTitle(this.translate.instant('login'));
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.titleService.setTitle(this.translate.instant('login'));
+    this.email = '';
+    this.password = '';
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) {
-      this.snackbarService.showError('Invalid input');
-      return;
-    }
     const user: User = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password,
+      email: this.email,
+      password: this.password,
     };
     this.authService.signInUser(user).subscribe(
       () => {

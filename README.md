@@ -4,6 +4,7 @@ Angular Movie App is an application that allows you to discover top-rated movies
 
 ## Table of Contents
 
+- [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
@@ -13,10 +14,14 @@ Angular Movie App is an application that allows you to discover top-rated movies
 - [Running unit tests](#running-unit-tests)
 - [License](#license)
 
+## Demo
+
+A live demo of the application is available at https://faroukamr.github.io/ng-movie-app-main/
+
 ## Installation
 
-- git `clone` https://github.com/FaroukAmr/ng-movie-app-main
-- `cd` ng-movie-app-main
+- `git clone https://github.com/FaroukAmr/ng-movie-app-main`
+- `cd ng-movie-app-main`
 - Run `npm install` to install all dependencies.
 
 ## Usage
@@ -25,7 +30,7 @@ Angular Movie App is designed to provide an easy and intuitive way to explore mo
 
 - Authentication: Upon launching the application, you'll need to Create an account or log in to access the application.
 
-- Discover Top Movies: Up logging in, you'll immediately see a list of top-rated movies. Click on a movie to view its details.
+- Discover Top Movies: Once logged in, you'll immediately see a list of top-rated movies. Click on a movie to view its details.
 
 - Search for Movies: Use the search bar at the top to search for specific movies by title.
 
@@ -43,7 +48,7 @@ Angular Movie App is designed to provide an easy and intuitive way to explore mo
 
 ## Technologies
 
-- Angular 11
+- Angular
 - Angular Material
 - Bootstrap
 - TheMovieDB API

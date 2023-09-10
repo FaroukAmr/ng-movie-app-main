@@ -1,24 +1,35 @@
 <div class="login-container">
   <h2>{{ "login" | translate }}</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="form-container">
     <div>
-      <label for="username" class="form-label">{{ "email" | translate }}</label>
+      <label for="email" class="form-label">{{ "email" | translate }}</label>
       <input
         type="text"
         id="email"
-        formControlName="email"
+        name="email"
+        [(ngModel)]="email"
         class="form-control"
+        required
+        email
+        [ngClass]="{
+          error:
+            loginForm.controls['email'] &&
+            loginForm.controls['email'].invalid &&
+            loginForm.controls['email'].touched
+        }"
       />
+
       <div
         class="error-message"
         *ngIf="
-          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          loginForm.controls['email']?.invalid &&
+          loginForm.controls['email'].touched
         "
       >
-        <div *ngIf="loginForm.get('email')?.hasError('required')">
+        <div *ngIf="loginForm.controls['email'].hasError('required')">
           {{ "validators.required" | translate }}
         </div>
-        <div *ngIf="loginForm.get('email')?.hasError('email')">
+        <div *ngIf="loginForm.controls['email'].hasError('email')">
           {{ "validators.email" | translate }}
         </div>
       </div>
@@ -30,20 +41,29 @@
       <input
         type="password"
         id="password"
-        formControlName="password"
+        name="password"
+        [(ngModel)]="password"
         class="form-control"
+        required
+        minlength="6"
+        [ngClass]="{
+          error:
+            loginForm.controls['password'] &&
+            loginForm.controls['password'].invalid &&
+            loginForm.controls['password'].touched
+        }"
       />
       <div
         class="error-message"
         *ngIf="
-          loginForm.get('password')?.invalid &&
-          loginForm.get('password')?.touched
+          loginForm.controls['password']?.invalid &&
+          loginForm.controls['password'].touched
         "
       >
-        <div *ngIf="loginForm.get('password')?.hasError('required')">
+        <div *ngIf="loginForm.controls['password'].hasError('required')">
           {{ "validators.required" | translate }}
         </div>
-        <div *ngIf="loginForm.get('password')?.hasError('minlength')">
+        <div *ngIf="loginForm.controls['password'].hasError('minlength')">
           {{ "validators.password" | translate }}
         </div>
       </div>

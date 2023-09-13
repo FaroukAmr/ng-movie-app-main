@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Movie, StoredTopMoviesData } from '../models/movie.model';
+import { Movie, StoredTopMoviesData } from '../../models/movie.model';
 
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../home/movies.service';
+import { MovieService } from '../../services/movies.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({

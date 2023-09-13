@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from '../models/movie.model';
-import { MovieService } from '../home/movies.service';
+import { Movie } from '../../models/movie.model';
+import { MovieService } from '../../services/movies.service';
 import { Title } from '@angular/platform-browser';
 
 export enum MovieRating {

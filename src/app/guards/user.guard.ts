@@ -1,4 +1,4 @@
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard {
+export class UserGuard {
   constructor(
     private authService: AuthenticationService,
     private router: Router
@@ -18,8 +18,8 @@ export class AuthGuard {
     return this.authService.user$.pipe(
       take(1),
       map((user) => {
-        if (!user) {
-          this.router.navigate(['auth', 'login']);
+        if (user) {
+          this.router.navigate(['']);
           return false;
         } else {
           return true;

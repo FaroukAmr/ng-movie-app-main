@@ -12,7 +12,7 @@ import {
 } from '@ngx-translate/core';
 import { MovieDetailsComponent, MovieRating } from './movie-details.component';
 
-import { MovieService } from '../home/movies.service';
+import { MovieService } from '../../services/movies.service';
 import { Title } from '@angular/platform-browser';
 import { of } from 'rxjs';
 

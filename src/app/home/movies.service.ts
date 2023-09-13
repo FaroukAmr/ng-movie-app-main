@@ -8,11 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MovieService {
   private apiKey = environment.THEMOVIEDB_API_KEY;
-  private language: string;
-  constructor(private http: HttpClient) {
-    this.language = localStorage.getItem('currentLanguage') || 'en';
-    console.log(this.language);
-  }
+  constructor(private http: HttpClient) {}
 
   getTopMovies(language: string): Observable<any> {
     const topRatedUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=${language}`;

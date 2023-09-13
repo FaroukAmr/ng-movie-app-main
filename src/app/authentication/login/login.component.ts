@@ -15,8 +15,8 @@ import { User } from '../../models/user.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email: string = '';
-  password: string = '';
+  email: string;
+  password: string;
 
   constructor(
     private authService: AuthenticationService,
@@ -24,12 +24,13 @@ export class LoginComponent implements OnInit {
     private snackbarService: SnackbarService,
     private translate: TranslateService,
     private titleService: Title
-  ) {}
+  ) {
+    this.email = '';
+    this.password = '';
+  }
 
   ngOnInit() {
     this.titleService.setTitle(this.translate.instant('login'));
-    this.email = '';
-    this.password = '';
   }
 
   onSubmit() {
@@ -43,7 +44,6 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.snackbarService.showError(error);
-        console.log(error);
       }
     );
   }

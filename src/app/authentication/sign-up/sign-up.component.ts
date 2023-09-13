@@ -70,7 +70,6 @@ export class SignUpComponent implements OnInit {
       });
     } catch (error) {
       this.snackbarService.showError(error as string);
-      console.log(error);
     }
   }
 }

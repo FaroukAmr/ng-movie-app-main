@@ -107,12 +107,9 @@ export class HomeComponent implements OnDestroy {
   }
 
   handleSearch() {
-    const spinnerTimeout = setTimeout(() => {
-      this.isLoading = true;
-    }, 100);
+    this.isLoading = true;
     if (this.query === '') {
       this.getTopMovies();
-      clearTimeout(spinnerTimeout);
       this.isLoading = false;
       return;
     }
@@ -120,11 +117,9 @@ export class HomeComponent implements OnDestroy {
     this.movieService.searchMovies(this.query, this.currentLanguage).subscribe(
       (data) => {
         this.topMovies = data.results;
-        clearTimeout(spinnerTimeout);
         this.isLoading = false;
       },
       (error) => {
-        clearTimeout(spinnerTimeout);
         this.isLoading = false;
         this.snackbarService.showError(error.message);
       }

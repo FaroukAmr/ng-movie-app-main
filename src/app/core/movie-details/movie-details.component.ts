@@ -52,9 +52,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getMovieDetails(): void {
-    const spinnerTimeout = setTimeout(() => {
-      this.isLoading = true;
-    }, 100);
+    this.isLoading = true;
 
     if (this.movieId != '') {
       this.movieService
@@ -62,15 +60,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         .subscribe(
           (data) => {
             this.movieDetails = data;
-            clearTimeout(spinnerTimeout);
             this.isLoading = false;
             this.titleService.setTitle(
               this.movieDetails.title || 'Movie Details'
             );
           },
-          (error) => {
-            console.error(error);
-            clearTimeout(spinnerTimeout);
+          () => {
             this.isLoading = false;
           }
         );

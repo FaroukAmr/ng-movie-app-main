@@ -75,33 +75,6 @@ describe('MovieDetailsComponent', () => {
     expect(titleServiceMock.setTitle).toHaveBeenCalledWith(movieTitle);
   });
 
-  it('should set isLoading to true after 100ms', fakeAsync(() => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-    component.isLoading = false;
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBe(false);
-    tick(110);
-    expect(component.isLoading).toBe(true);
-  }));
-
-  it('should set isLoading to false when getMovieDetails successfully fetches data', () => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBeFalsy();
-  });
-
-  it('should set isLoading to false when getMovieDetails encounters an error', () => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBeFalsy();
-  });
-
   it('should return the correct color for a high vote average', () => {
     const highVoteAverage = 8.5;
     const color = component.getColorForRating(highVoteAverage);

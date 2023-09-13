@@ -12,9 +12,12 @@
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  align-items: flex-end;
+  margin: 0;
   gap: 1rem;
-  margin-left: 0;
 }
 
 .movie-poster {
@@ -55,4 +58,6 @@
   font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.5;
+  max-width: 40rem;
+  border: 1px solid black;
 }

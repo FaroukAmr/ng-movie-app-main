@@ -1,36 +1,39 @@
 <div class="container" *ngIf="!isLoading; else loadingTemplate">
-  <div class="movie-title">{{ movieDetails.title }}</div>
-  <div class="info-container">
-    <div class="date">{{ movieDetails.release_date.split("-")[0] }}</div>
-    <div *ngFor="let genre of movieDetails.genres" class="genre">
-      {{ genre.name }}
-    </div>
+  <div>
+    <div class="movie-title">{{ movieDetails.title }}</div>
+    <div class="info-container">
+      <div class="date">{{ movieDetails.release_date.split("-")[0] }}</div>
+      <div *ngFor="let genre of movieDetails.genres" class="genre">
+        {{ genre.name }}
+      </div>
 
-    <div
-      class="rating"
-      [ngStyle]="{ color: getColorForRating(movieDetails.vote_average) }"
-    >
-      {{ movieDetails.vote_average.toFixed(2) }}
-      <div style="color: black">
-        /10 ({{ movieDetails.vote_count }} {{ "votes" | translate }} )
+      <div
+        class="rating"
+        [ngStyle]="{ color: getColorForRating(movieDetails.vote_average) }"
+      >
+        {{ movieDetails.vote_average.toFixed(2) }}
+        <div style="color: black">
+          /10 ({{ movieDetails.vote_count }} {{ "votes" | translate }} )
+        </div>
       </div>
     </div>
-  </div>
 
-  <img
-    *ngIf="movieDetails.poster_path; else defaultImage"
-    [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
-    alt="{{ movieDetails.title }}"
-    class="movie-poster"
-  />
-
-  <ng-template #defaultImage>
     <img
-      src="../../assets/notfound.jpg"
+      *ngIf="movieDetails.poster_path; else defaultImage"
+      [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path"
       alt="{{ movieDetails.title }}"
       class="movie-poster"
     />
-  </ng-template>
+
+    <ng-template #defaultImage>
+      <img
+        src="../../assets/notfound.jpg"
+        alt="{{ movieDetails.title }}"
+        class="movie-poster"
+      />
+    </ng-template>
+  </div>
+
   <div class="movie-overview">{{ movieDetails.overview }}</div>
 </div>
 <ng-template #loadingTemplate>

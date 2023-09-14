@@ -10,8 +10,8 @@ import { inject } from '@angular/core';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home', // Redirect empty path to 'home'
-    pathMatch: 'full', // Use 'full' to match the complete path
+    redirectTo: 'home', 
+    pathMatch: 'full', 
   },
   {
     path: 'home',

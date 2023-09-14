@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpComponent } from './sign-up.component';
-import { SnackbarService } from 'src/app/snackbar.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
 import { of } from 'rxjs';

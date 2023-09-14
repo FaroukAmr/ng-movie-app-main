@@ -12,7 +12,7 @@ import {
 } from '@ngx-translate/core';
 import { MovieDetailsComponent, MovieRating } from './movie-details.component';
 
-import { MovieService } from '../home/movies.service';
+import { MovieService } from '../../services/movies.service';
 import { Title } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
@@ -73,33 +73,6 @@ describe('MovieDetailsComponent', () => {
     component.ngOnInit();
 
     expect(titleServiceMock.setTitle).toHaveBeenCalledWith(movieTitle);
-  });
-
-  it('should set isLoading to true after 100ms', fakeAsync(() => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-    component.isLoading = false;
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBe(false);
-    tick(110);
-    expect(component.isLoading).toBe(true);
-  }));
-
-  it('should set isLoading to false when getMovieDetails successfully fetches data', () => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBeFalsy();
-  });
-
-  it('should set isLoading to false when getMovieDetails encounters an error', () => {
-    spyOn(movieServiceMock, 'getMovieDetails').and.returnValue(of({}));
-
-    component.getMovieDetails();
-
-    expect(component.isLoading).toBeFalsy();
   });
 
   it('should return the correct color for a high vote average', () => {

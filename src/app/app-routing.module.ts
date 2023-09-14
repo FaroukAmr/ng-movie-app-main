@@ -1,18 +1,17 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './authentication/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { HomeComponent } from './home/home.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { UserGuard } from './authentication/user.guard';
+import { UserGuard } from './guards/user.guard';
 import { inject } from '@angular/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadChildren: () => CoreModule,
     canActivate: [() => inject(AuthGuard).canActivate()],
   },
   {
@@ -22,11 +21,6 @@ const routes: Routes = [
   },
   { path: 'login', redirectTo: 'auth/login' },
   { path: 'register', redirectTo: 'auth/register' },
-  {
-    path: 'movie/:id',
-    component: MovieDetailsComponent,
-    canActivate: [() => inject(AuthGuard).canActivate()],
-  },
   { path: '**', component: NotFoundComponent },
 ];
 

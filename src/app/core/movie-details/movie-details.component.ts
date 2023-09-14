@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from '../models/movie.model';
-import { MovieService } from '../home/movies.service';
+import { Movie } from '../../models/movie.model';
+import { MovieService } from '../../services/movies.service';
 import { Title } from '@angular/platform-browser';
 
 export enum MovieRating {
@@ -52,9 +52,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getMovieDetails(): void {
-    const spinnerTimeout = setTimeout(() => {
-      this.isLoading = true;
-    }, 100);
+    this.isLoading = true;
 
     if (this.movieId != '') {
       this.movieService
@@ -62,15 +60,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         .subscribe(
           (data) => {
             this.movieDetails = data;
-            clearTimeout(spinnerTimeout);
             this.isLoading = false;
             this.titleService.setTitle(
               this.movieDetails.title || 'Movie Details'
             );
           },
-          (error) => {
-            console.error(error);
-            clearTimeout(spinnerTimeout);
+          () => {
             this.isLoading = false;
           }
         );

@@ -10,9 +10,9 @@ import { HomeComponent } from './home.component';
 import { HttpClient } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { Movie } from '../models/movie.model';
-import { MovieService } from '../home/movies.service';
-import { SnackbarService } from '../snackbar.service';
+import { Movie } from '../../models/movie.model';
+import { MovieService } from '../../services/movies.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { Title } from '@angular/platform-browser';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader } from '@ngx-translate/core';
@@ -156,7 +156,6 @@ describe('HomeComponent', () => {
 
     expect(movieSpy).toHaveBeenCalledWith(query, component['currentLanguage']);
   });
-
 
   it('should return true on valid data', () => {
     const data = [{ id: 1, title: 'test' }] as Movie[];

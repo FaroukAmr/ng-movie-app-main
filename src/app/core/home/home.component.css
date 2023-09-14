@@ -2,7 +2,7 @@
   max-height: 16rem;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
@@ -29,6 +29,9 @@
   color: #333;
   font-size: 20px;
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card-text {

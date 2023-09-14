@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Movie, StoredTopMoviesData } from '../models/movie.model';
+import { Movie, StoredTopMoviesData } from '../../models/movie.model';
 
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../home/movies.service';
+import { MovieService } from '../../services/movies.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -107,12 +107,9 @@ export class HomeComponent implements OnDestroy {
   }
 
   handleSearch() {
-    const spinnerTimeout = setTimeout(() => {
-      this.isLoading = true;
-    }, 100);
+    this.isLoading = true;
     if (this.query === '') {
       this.getTopMovies();
-      clearTimeout(spinnerTimeout);
       this.isLoading = false;
       return;
     }
@@ -120,11 +117,9 @@ export class HomeComponent implements OnDestroy {
     this.movieService.searchMovies(this.query, this.currentLanguage).subscribe(
       (data) => {
         this.topMovies = data.results;
-        clearTimeout(spinnerTimeout);
         this.isLoading = false;
       },
       (error) => {
-        clearTimeout(spinnerTimeout);
         this.isLoading = false;
         this.snackbarService.showError(error.message);
       }

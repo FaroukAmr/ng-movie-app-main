@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from 'src/app/snackbar.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
@@ -70,7 +70,6 @@ export class SignUpComponent implements OnInit {
       });
     } catch (error) {
       this.snackbarService.showError(error as string);
-      console.log(error);
     }
   }
 }

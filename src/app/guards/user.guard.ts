@@ -19,7 +19,7 @@ export class UserGuard {
       take(1),
       map((user) => {
         if (user) {
-          this.router.navigate(['']);
+          this.router.navigate(['home']);
           return false;
         } else {
           return true;

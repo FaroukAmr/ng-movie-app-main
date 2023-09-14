@@ -127,7 +127,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   handleViewMovieDetails(movieId: number) {
-    this.router.navigate(['/movie', movieId]);
+    this.router.navigate(['home', 'movie', movieId]);
   }
 
   ngOnDestroy() {

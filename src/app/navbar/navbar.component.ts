@@ -46,7 +46,7 @@ export class NavbarComponent implements OnDestroy {
 
   navigateToHome() {
     this.searchQuery = '';
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy() {

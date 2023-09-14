@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     };
     this.authService.signInUser(user).subscribe(
       () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.snackbarService.showError(error);

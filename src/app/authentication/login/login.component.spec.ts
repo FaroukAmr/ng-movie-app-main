@@ -71,7 +71,7 @@ describe('LoginComponent', () => {
     component.onSubmit();
 
     expect(authServiceSpy).toHaveBeenCalled();
-    expect(routerSpy).toHaveBeenCalledWith(['/']);
+    expect(routerSpy).toHaveBeenCalledWith(['/home']);
     expect(snackbarServiceSpy).not.toHaveBeenCalled();
   });
 
